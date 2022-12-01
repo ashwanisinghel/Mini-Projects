@@ -1,0 +1,98 @@
+:root{
+    --box-shadow: 0px 1px 4px 1px rgba(199,199,199,1)
+}
+
+body{
+    font-family: 'Rubik','sans-serfi';
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.app h1{
+    text-align: center;
+}
+h2{
+    text-transform: uppercase;
+}
+
+.balance{
+    font-size: 1.5em;
+}
+.cashflowContainer{
+    display: flex;
+    box-shadow: var(--box-shadow);
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 20px;
+}
+.incomeContainer , .expenseContainer{
+    padding: 40px;
+    padding-top: 0%;
+    padding-bottom: 0%;
+}
+.income{
+    color: green;
+    font-size: 1.3em;
+}
+.expense{
+    color: red;
+    font-size: 1.3em;
+}
+
+#transaction{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+#transaction li{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    margin: 3px;
+    box-shadow: var(--box-shadow);
+}
+.incomeAmount{
+    color: white;
+    background-color: green;
+    padding: 5px;
+    margin-right: 5px;
+    border-radius: 4.7px;
+}
+.expenseAmount{
+    color: white;
+    background-color: red;
+    padding: 5px;
+    margin-right: 5px;
+    border-radius: 4.7px;
+}
+.crossButton{
+    padding: 4.8px 7px 4.8px 7px;
+}
+
+.formContainer form{
+    display: flex;
+    flex-direction: column;
+}
+.formContainer form input{
+    margin-bottom: 10px;
+    margin-top: 10px;
+    padding: 10px;
+}
+.formContainer form label{
+    margin-top: 10px;
+}
+.formContainer form button{
+    margin-top: 10px;
+    padding: 10px;
+}
+
+#incomeButton{
+    background-color: green;
+    color: white;
+}
+#expenseButton{
+    background-color: red;
+    color: white;
+}
