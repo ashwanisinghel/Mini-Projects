@@ -109,7 +109,7 @@ function removeTask(e) {
 }
 
 // Remove from LS
-removeTaskFromLocalStorage(taskItem){
+function removeTaskFromLocalStorage(taskItem){
     let tasks;
     if(localStorage.getItem('tasks')===null){
         tasks=[];
@@ -128,12 +128,13 @@ removeTaskFromLocalStorage(taskItem){
 
 // Clear Tasks
 function clearTasks() {
+  if(prompt("Enter 'Delete' to clear Task").toLocaleLowerCase()==='delete'){
+    while(taskList.firstChild) {
+      taskList.removeChild(taskList.firstChild);
+    }
 
-  while(taskList.firstChild) {
-    taskList.removeChild(taskList.firstChild);
+    clearTasksFromLocalStorage();
   }
-
-  clearTasksFromLocalStorage();
 }
 
 // Clear Tasks from LS
