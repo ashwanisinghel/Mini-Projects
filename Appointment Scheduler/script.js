@@ -64,17 +64,25 @@ function removeListOfAppointments(e){
     removeAppointmentFromLocalStorage(e.target.parentElement.parentElement.textContent);
 }
 function removeAppointmentFromLocalStorage(content){
-    let details;
-    if(localStorage.getItem('details')===null){
-        details=[]
-    }else{
-       details = JSON.parse(localStorage.getItem('details'));
-    }
-    details.forEach((element,index)=>{
-        if(content.includes(element.phone)){
-            details.splice(index,1);
-        }
-    })
+    // let details;
+    // if(localStorage.getItem('details')===null){
+    //     details=[]
+    // }else{
+    //    details = JSON.parse(localStorage.getItem('details'));
+    // }
+    // details.forEach((element,index)=>{
+    //     if(content.includes(element.phone)){
+    //         details.splice(index,1);
+    //     }
+    // })
 
-    localStorage.setItem('details',JSON.stringify(details));
+    // localStorage.setItem('details',JSON.stringify(details));
+    axios.get('https://crudcrud.com/api/462e9c1b4b304856be4959e9566c2383/appointmentData').then((response)=>{
+        response.data.forEach((element)=>{
+            if(content.includes(element.phone)){
+                // console.log(element._id);
+                axios.delete(`https://crudcrud.com/api/462e9c1b4b304856be4959e9566c2383/appointmentData/${element._id}`)
+            }
+        })
+    })
 }
