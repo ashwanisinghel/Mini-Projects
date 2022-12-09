@@ -13,7 +13,7 @@ function initListioners(){
     expList.addEventListener('click',editExpense);
 }
 function getExpense(){
-    axios.get('https://crudcrud.com/api/fffd013d7ff543e1930a0c2da8f93b2d/expense').then((response)=>{
+    axios.get('https://crudcrud.com/api/f5032bbd648f42ce871bc50c0e8d48b3/expense').then((response)=>{
         response.data.forEach((detail)=>{
             newExpense(detail);
         })
@@ -28,7 +28,7 @@ function onFormSubmit(event){
         type: selectIp.value,
         detail: detailIp.value
     }
-    axios.post('https://crudcrud.com/api/fffd013d7ff543e1930a0c2da8f93b2d/expense',formDetails)
+    axios.post('https://crudcrud.com/api/f5032bbd648f42ce871bc50c0e8d48b3/expense',formDetails)
     newExpense(formDetails)
     event.preventDefault();
 }
@@ -42,25 +42,45 @@ function newExpense(formDetails){
 function removeExpense(e){
     if(e.target.classList.contains('deleteLi')){
         e.target.parentElement.parentElement.remove();
+        removeFromServer(e.target.parentElement.parentElement.textContent)
     }
-
-    console.log(e.target.parentElement.parentElement.textContent)
-
-    removeFromServer(e.target.parentElement.parentElement.textContent)
 }
 
 function removeFromServer(text){
-    axios.get('https://crudcrud.com/api/fffd013d7ff543e1930a0c2da8f93b2d/expense').then((reponse)=>{
+    axios.get('https://crudcrud.com/api/f5032bbd648f42ce871bc50c0e8d48b3/expense').then((reponse)=>{
         reponse.data.forEach((detail)=>{
             if(text==`${detail.amount} for ${detail.type} : ${detail.detail} `){
-                axios.delete(`https://crudcrud.com/api/fffd013d7ff543e1930a0c2da8f93b2d/expense/${detail._id}`)
+                axios.delete(`https://crudcrud.com/api/f5032bbd648f42ce871bc50c0e8d48b3/expense/${detail._id}`)
             }
         })
     })
 }
 
 function editExpense(e){
+    if(e.target.classList.contains('editLi')){
+        axios.get('https://crudcrud.com/api/f5032bbd648f42ce871bc50c0e8d48b3/expense').then((response)=>{
+            response.data.forEach((detail)=>{
+                if(e.target.parentElement.parentElement.textContent==`${detail.amount} for ${detail.type} : ${detail.detail} `){
+                    amountIp.value=detail.amount;
+                    selectIp.value=detail.type;
+                    detailIp.value=detail.detail;
 
+                    formIp.addEventListener('submit',modifyDetails);
+
+                    function modifyDetails(){
+                        let newformDetails={
+                            amount: amountIp.value,
+                            type: selectIp.value,
+                            detail: detailIp.value
+                        }
+                        axios.put(`https://crudcrud.com/api/f5032bbd648f42ce871bc50c0e8d48b3/expense/${detail._id}`,newformDetails);
+
+                        location.reload();
+                    }
+                }
+            })
+        })
+    }
 }
 
 
