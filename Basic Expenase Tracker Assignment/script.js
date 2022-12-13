@@ -13,7 +13,7 @@ function initListioners(){
     expList.addEventListener('click',editExpense);
 }
 function getExpense(){
-    axios.get('https://crudcrud.com/api/f5032bbd648f42ce871bc50c0e8d48b3/expense').then((response)=>{
+    axios.get('https://crudcrud.com/api/26428e60bd854064bf86428b48fea713/expense').then((response)=>{
         response.data.forEach((detail)=>{
             newExpense(detail);
         })
@@ -28,8 +28,12 @@ function onFormSubmit(event){
         type: selectIp.value,
         detail: detailIp.value
     }
-    axios.post('https://crudcrud.com/api/f5032bbd648f42ce871bc50c0e8d48b3/expense',formDetails)
+    axios.post('https://crudcrud.com/api/26428e60bd854064bf86428b48fea713/expense',formDetails)
     newExpense(formDetails)
+
+    amountIp.value='';
+    selectIp.value='';
+    detailIp.value='';
     event.preventDefault();
 }
 
@@ -47,10 +51,10 @@ function removeExpense(e){
 }
 
 function removeFromServer(text){
-    axios.get('https://crudcrud.com/api/f5032bbd648f42ce871bc50c0e8d48b3/expense').then((reponse)=>{
+    axios.get('https://crudcrud.com/api/26428e60bd854064bf86428b48fea713/expense').then((reponse)=>{
         reponse.data.forEach((detail)=>{
             if(text==`${detail.amount} for ${detail.type} : ${detail.detail} `){
-                axios.delete(`https://crudcrud.com/api/f5032bbd648f42ce871bc50c0e8d48b3/expense/${detail._id}`)
+                axios.delete(`https://crudcrud.com/api/26428e60bd854064bf86428b48fea713/expense/${detail._id}`)
             }
         })
     })
@@ -58,28 +62,18 @@ function removeFromServer(text){
 
 function editExpense(e){
     if(e.target.classList.contains('editLi')){
-        axios.get('https://crudcrud.com/api/f5032bbd648f42ce871bc50c0e8d48b3/expense').then((response)=>{
+        axios.get('https://crudcrud.com/api/26428e60bd854064bf86428b48fea713/expense').then((response)=>{
             response.data.forEach((detail)=>{
                 if(e.target.parentElement.parentElement.textContent==`${detail.amount} for ${detail.type} : ${detail.detail} `){
                     amountIp.value=detail.amount;
                     selectIp.value=detail.type;
                     detailIp.value=detail.detail;
-
-                    formIp.addEventListener('submit',modifyDetails);
-
-                    function modifyDetails(){
-                        let newformDetails={
-                            amount: amountIp.value,
-                            type: selectIp.value,
-                            detail: detailIp.value
-                        }
-                        axios.put(`https://crudcrud.com/api/f5032bbd648f42ce871bc50c0e8d48b3/expense/${detail._id}`,newformDetails);
-
-                        location.reload();
-                    }
+                 
                 }
             })
         })
+        e.target.parentElement.parentElement.remove();
+        removeFromServer(e.target.parentElement.parentElement.textContent)
     }
 }
 
