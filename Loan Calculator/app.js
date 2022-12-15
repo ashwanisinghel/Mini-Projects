@@ -1,4 +1,10 @@
-document.getElementById('loan-form').addEventListener('submit',onFormSubmit);
+document.getElementById('loan-form').addEventListener('submit',(e)=>{
+    console.log('test');
+    document.getElementById('loading').style.display='block';
+    document.getElementById('results').style.display='none';
+    onFormSubmit();
+    e.preventDefault()
+});
 
 function onFormSubmit(e){
     const amount=document.getElementById('amount');
@@ -14,12 +20,18 @@ function onFormSubmit(e){
     const totalInterest=totalPayment-parseFloat(amount.value);
     // console.log(monthelyPayment,totalPayment,totalInterest);
 
-    if(isFinite(monthelyPayment)){
-        document.getElementById('monthly-payment').value=Math.ceil(monthelyPayment);
-        document.getElementById('total-payment').value=Math.ceil(totalPayment);
-        document.getElementById('total-interest').value=Math.ceil(totalInterest);
-    }else{
-        alert("Input check kar")
-    }
-    e.preventDefault()
+    setTimeout(() => {
+        if(isFinite(monthelyPayment)){
+            document.getElementById('monthly-payment').value=Math.ceil(monthelyPayment);
+            document.getElementById('total-payment').value=Math.ceil(totalPayment);
+            document.getElementById('total-interest').value=Math.ceil(totalInterest);
+        }else{
+            alert("Input check kar");
+        }
+
+        document.getElementById('loading').style.display='none';
+        document.getElementById('results').style.display='block';
+
+    }, 300); 
+    
 }
