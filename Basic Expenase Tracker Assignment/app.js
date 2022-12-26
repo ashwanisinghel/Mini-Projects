@@ -92,6 +92,9 @@ async function onFormSubmit(e){
 
     let response=await Server.add(obj);
     Expense.add(response); 
+
+    amountIp.value='';
+    detailIp.value='';
 }
 
 async function removeExpense(e){
