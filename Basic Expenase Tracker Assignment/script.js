@@ -2,7 +2,7 @@ let formIp= document.querySelector('.formIp');
 let amountIp=document.querySelector('#amountIp');
 let selectIp=document.querySelector('#selectIp');
 let detailIp=document.querySelector('#detailIp');
-let expList=document.querySelector('.expList')
+let expList=document.querySelector('.expList');
 
 initListioners();
 
@@ -13,7 +13,7 @@ function initListioners(){
     expList.addEventListener('click',editExpense);
 }
 function getExpense(){
-    axios.get('https://crudcrud.com/api/26428e60bd854064bf86428b48fea713/expense').then((response)=>{
+    axios.get('https://crudcrud.com/api/b1bc6ad8c61a4c3db4d5d52f9fd6f310/expense').then((response)=>{
         response.data.forEach((detail)=>{
             newExpense(detail);
         })
@@ -28,12 +28,13 @@ function onFormSubmit(event){
         type: selectIp.value,
         detail: detailIp.value
     }
-    axios.post('https://crudcrud.com/api/26428e60bd854064bf86428b48fea713/expense',formDetails)
+    axios.post('https://crudcrud.com/api/b1bc6ad8c61a4c3db4d5d52f9fd6f310/expense',formDetails)
     newExpense(formDetails)
 
     amountIp.value='';
     selectIp.value='';
     detailIp.value='';
+    
     event.preventDefault();
 }
 
@@ -51,10 +52,10 @@ function removeExpense(e){
 }
 
 function removeFromServer(text){
-    axios.get('https://crudcrud.com/api/26428e60bd854064bf86428b48fea713/expense').then((reponse)=>{
+    axios.get('https://crudcrud.com/api/b1bc6ad8c61a4c3db4d5d52f9fd6f310/expense').then((reponse)=>{
         reponse.data.forEach((detail)=>{
             if(text==`${detail.amount} for ${detail.type} : ${detail.detail} `){
-                axios.delete(`https://crudcrud.com/api/26428e60bd854064bf86428b48fea713/expense/${detail._id}`)
+                axios.delete(`https://crudcrud.com/api/b1bc6ad8c61a4c3db4d5d52f9fd6f310/expense/${detail._id}`)
             }
         })
     })
@@ -62,7 +63,7 @@ function removeFromServer(text){
 
 function editExpense(e){
     if(e.target.classList.contains('editLi')){
-        axios.get('https://crudcrud.com/api/26428e60bd854064bf86428b48fea713/expense').then((response)=>{
+        axios.get('https://crudcrud.com/api/b1bc6ad8c61a4c3db4d5d52f9fd6f310/expense').then((response)=>{
             response.data.forEach((detail)=>{
                 if(e.target.parentElement.parentElement.textContent==`${detail.amount} for ${detail.type} : ${detail.detail} `){
                     amountIp.value=detail.amount;
