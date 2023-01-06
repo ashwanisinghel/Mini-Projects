@@ -13,7 +13,7 @@ function initListioners(){
     expList.addEventListener('click',editExpense);
 }
 function getExpense(){
-    axios.get('https://crudcrud.com/api/b1bc6ad8c61a4c3db4d5d52f9fd6f310/expense').then((response)=>{
+    axios.get('https://crudcrud.com/api/f7d56b3c2683485d9e33c097e2c78ee9/expense').then((response)=>{
         response.data.forEach((detail)=>{
             newExpense(detail);
         })
@@ -28,7 +28,7 @@ function onFormSubmit(event){
         type: selectIp.value,
         detail: detailIp.value
     }
-    axios.post('https://crudcrud.com/api/b1bc6ad8c61a4c3db4d5d52f9fd6f310/expense',formDetails)
+    axios.post('https://crudcrud.com/api/f7d56b3c2683485d9e33c097e2c78ee9/expense',formDetails)
     newExpense(formDetails)
 
     amountIp.value='';
@@ -52,10 +52,10 @@ function removeExpense(e){
 }
 
 function removeFromServer(text){
-    axios.get('https://crudcrud.com/api/b1bc6ad8c61a4c3db4d5d52f9fd6f310/expense').then((reponse)=>{
+    axios.get('https://crudcrud.com/api/f7d56b3c2683485d9e33c097e2c78ee9/expense').then((reponse)=>{
         reponse.data.forEach((detail)=>{
             if(text==`${detail.amount} for ${detail.type} : ${detail.detail} `){
-                axios.delete(`https://crudcrud.com/api/b1bc6ad8c61a4c3db4d5d52f9fd6f310/expense/${detail._id}`)
+                axios.delete(`https://crudcrud.com/api/f7d56b3c2683485d9e33c097e2c78ee9/expense/${detail._id}`)
             }
         })
     })
@@ -63,7 +63,7 @@ function removeFromServer(text){
 
 function editExpense(e){
     if(e.target.classList.contains('editLi')){
-        axios.get('https://crudcrud.com/api/b1bc6ad8c61a4c3db4d5d52f9fd6f310/expense').then((response)=>{
+        axios.get('https://crudcrud.com/api/f7d56b3c2683485d9e33c097e2c78ee9/expense').then((response)=>{
             response.data.forEach((detail)=>{
                 if(e.target.parentElement.parentElement.textContent==`${detail.amount} for ${detail.type} : ${detail.detail} `){
                     amountIp.value=detail.amount;

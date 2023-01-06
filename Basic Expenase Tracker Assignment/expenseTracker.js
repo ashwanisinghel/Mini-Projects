@@ -23,7 +23,7 @@ class Expense{
 class Server{
     static async add(obj){
         try{
-            let response= await axios.post('https://crudcrud.com/api/c016e35a26ae41db8e488d1197cbe53c/expense',obj)
+            let response= await axios.post('https://crudcrud.com/api/f7d56b3c2683485d9e33c097e2c78ee9/expense',obj)
             return response.data;
         }catch(err){
             console.log(err);
@@ -31,7 +31,7 @@ class Server{
     }
     static async remove(id){
         try{
-            let response=await axios.delete(`https://crudcrud.com/api/c016e35a26ae41db8e488d1197cbe53c/expense/${id}`);
+            let response=await axios.delete(`https://crudcrud.com/api/f7d56b3c2683485d9e33c097e2c78ee9/expense/${id}`);
             return response.data;
         }
         catch(err){
@@ -41,7 +41,7 @@ class Server{
 
     static async get(){
         try{
-            let response=await axios.get('https://crudcrud.com/api/c016e35a26ae41db8e488d1197cbe53c/expense');
+            let response=await axios.get('https://crudcrud.com/api/f7d56b3c2683485d9e33c097e2c78ee9/expense');
             return response.data;
         }catch(err){
             console.log(err);
@@ -49,7 +49,7 @@ class Server{
     }
     static async getAgainstId(id){
         try{
-            let response=await axios.get(`https://crudcrud.com/api/c016e35a26ae41db8e488d1197cbe53c/expense/${id}`);
+            let response=await axios.get(`https://crudcrud.com/api/f7d56b3c2683485d9e33c097e2c78ee9/expense/${id}`);
             return response.data;
         }
         catch(err){
