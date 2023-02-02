@@ -1,7 +1,7 @@
 class Expense{
     static add(obj){
         let li=document.createElement('li');
-        li.id=`${obj._id}`;
+        li.id=`${obj.id}`;
         li.innerHTML=`${obj.amount} for ${obj.type} : ${obj.detail} <span><input type="submit" class="deleteLi" value="Delete"><input type="submit" class="editLi" value="Edit"></span>`;
         expList.appendChild(li);
     }
@@ -23,7 +23,7 @@ class Expense{
 class Server{
     static async add(obj){
         try{
-            let response= await axios.post('https://crudcrud.com/api/cccea56e08184880b7e472ad5e0b0626/expense',obj)
+            let response= await axios.post('http://localhost:8080/expense-api',obj)
             return response.data;
         }catch(err){
             console.log(err);
@@ -31,7 +31,7 @@ class Server{
     }
     static async remove(id){
         try{
-            let response=await axios.delete(`https://crudcrud.com/api/cccea56e08184880b7e472ad5e0b0626/expense/${id}`);
+            let response=await axios.delete(`http://localhost:8080/expense-api/${id}`);
             return response.data;
         }
         catch(err){
@@ -41,7 +41,7 @@ class Server{
 
     static async get(){
         try{
-            let response=await axios.get('https://crudcrud.com/api/cccea56e08184880b7e472ad5e0b0626/expense');
+            let response=await axios.get('http://localhost:8080/expense-api');
             return response.data;
         }catch(err){
             console.log(err);
@@ -49,7 +49,7 @@ class Server{
     }
     static async getAgainstId(id){
         try{
-            let response=await axios.get(`https://crudcrud.com/api/cccea56e08184880b7e472ad5e0b0626/expense/${id}`);
+            let response=await axios.get(`http://localhost:8080/expense-api/${id}`);
             return response.data;
         }
         catch(err){
@@ -103,7 +103,7 @@ async function removeExpense(e){
 
 async function editExpense(e){
     if(e.target.classList.contains('editLi')){
-        let detail= await Expense.edit(e)
+        let detail= await Expense.edit(e);
         amountIp.value=detail.amount;
         selectIp.value=detail.type;
         detailIp.value=detail.detail;
